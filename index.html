@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mall Customers Clustering</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+    <h2>Mall Customers Clustering</h2>
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Upload CSV File:</label>
+            <input type="file" name="file" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Select Features for Clustering:</label><br>
+            <input type="checkbox" name="features" value="Annual Income (k$)"> Annual Income (k$)
+            <input type="checkbox" name="features" value="Spending Score (1-100)"> Spending Score (1-100)
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Select Number of Clusters:</label>
+            <input type="number" name="num_clusters" value="3" min="2" max="10" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Run Clustering</button>
+    </form>
+
+    {% if clustered_data %}
+        <h3 class="mt-4">Clustered Data</h3>
+        {{ clustered_data | safe }}
+    {% endif %}
+
+    {% if cluster_plot %}
+        <h3 class="mt-4">Cluster Plot</h3>
+        <img src="data:image/png;base64,{{ cluster_plot }}" class="img-fluid">
+    {% endif %}
+</body>
+</html>
